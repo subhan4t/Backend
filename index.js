@@ -21,6 +21,7 @@ import Post from './models/Post.js'
 import { users, posts } from './data/index.js'
 
 
+
 /* CONFIGURATION */
 
 const __filename = fileURLToPath(import.meta.url)
@@ -59,6 +60,11 @@ app.post("/posts", verifyToken, upload.single("picture"), createPost)
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/posts', postRoutes);
+
+/* TESTING PURPOSE */
+app.use("/welcome", (req, res) => {
+    res.status(200).send("welcome")
+})
 
 /* MONGODB SETUP */
 const MONGO_URL = process.env.MONGO_URL
