@@ -77,7 +77,7 @@ mongoose.connect(MONGO_URL, {
     app.listen(PORT, () => { console.log(`Server Port : ${PORT}`)});
 
     /* DATA ON TIME, THESE 2 CODE MUST RUN SINGLE TIME BECOZ DUMMY DATA IN INDEX.JS RUNS MULTIPLE TIME , IT WILL GEN AN ERR BECOZ MONGODB DIDNT SUPPORT DUPLICATES*/
-   /* User.insertMany(users);
+  /*  User.insertMany(users);
     Post.insertMany(posts); */
 }).catch((error) => { console.log(`${error} didn't connect`)});
 
