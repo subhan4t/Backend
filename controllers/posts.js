@@ -70,3 +70,27 @@ export const likePost = async( req, res) => {
         res.status(404).json({msg: err.message})
     }
 }
+
+/* Delete */
+
+export const deletePost = async(req, res) => {
+    try{
+        const {id} =  req.params;
+        const userId = req.user.id;
+
+        const post = await Post.findById(id);
+
+        if(!post) {
+            return res.status(404).json({msg: "Post not found"})
+        }
+
+        if(post.userId.toString() !== userId) {
+            return res.status(403).json("You can only delete your own posts")
+        }
+
+        await Post.findByIdAndDelete(id);
+        return res.status(200).json("Post deleted successfully")
+    } catch(error) {
+        return res.status(500).json({ message: error.message})
+    }
+}

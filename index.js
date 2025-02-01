@@ -26,6 +26,12 @@ import { users, posts } from './data/index.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+const corsOptions = {
+    origin: ['https://devixbeta.netlify.app','http://localhost:5173'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],
+    credentials: true,
+}
+
 dotenv.config()
 const app = express()
 app.use(express.json())
@@ -34,7 +40,7 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin"})) //used to s
 app.use(morgan('common'))//
 app.use(bodyParser.json({ limit: "30mb", extended: true}))
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}))
-app.use(cors())
+app.use(cors(corsOptions))
 app.use("/assets", express.static(path.join(__dirname, 'public/assets'))) //express.static is a middleware used to serve static files
 
 /* FILE STORAGE */
